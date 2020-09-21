@@ -10,7 +10,7 @@ The backend here signs a JSON object with an API Secret creating a JWT. The enti
 
 ## Using the Backend
 
-The backend is invoked by POST-ing some JSON data to the `/generateUserData` route.
+The backend is invoked by retrieving some JSON data from the `/generateUserData` route.
 
 The result of this request is parsed as JSON and then set to the `userData` attribute of the `App` Component. See [the docs](https://docs.simplewebrtc.com/#/User_Data?id=_2-configure-simplewebrtc-with-correct-config-url-and-the-user-data-token) for more info on how to retrieve the data from peers to use in your app.
 
@@ -23,7 +23,7 @@ In this example the `userId` key from user data is [rendered in the `PeerGridIte
 4. `SWRTC_API_SECRET=<YOUR_SECRET_KEY> npm start`
 5. Go to [https://localhost:5000/](https://localhost:5000)
 
-## Deploying with Docker
+## Running with Docker
 
 1. Ensure that docker is [installed on your host](https://docs.docker.com/get-docker/)
 2. `docker build --build-args SWRTC_API_KEY=<YOUR_API_KEY> --tag <your-tag> .`

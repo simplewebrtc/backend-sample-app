@@ -231,15 +231,7 @@
     <script type="text/javascript">
       const params = new URLSearchParams(window.location.search);
 
-      fetch('/generateUserData', {
-        method: 'post',
-        body: JSON.stringify({
-          userId: 'a-user-id-this-is' // Change this JSON to your user data
-        }),
-        headers: {
-          'Content-type': 'application/json',
-        }
-      })
+      fetch('/generateUserData')
       .then((res) => res.json())
       .then((data) => {
         SimpleWebRTC.run({

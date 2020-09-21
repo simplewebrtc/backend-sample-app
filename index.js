@@ -4,6 +4,7 @@ const path = require('path');
 const BodyParser = require("body-parser")
 const Config = require("getconfig");
 const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 app.use(BodyParser.json());
@@ -15,14 +16,19 @@ app.get("/__healthcheck", async (_req, res) => {
 // Serve static build
 app.use(express.static(path.join(__dirname, 'client/dist')));
 
-app.post("/generateUserData", async (req, res) => {
+app.get("/generateUserData", async (_req, res) => {
 
-  const userDataPayload = req.body;
   let userDataToken;
     try {
       const secret = Config.apiSecret;
+      // Database lookups could happen here
+      // For example just sign a generated uuid
+      const userData = {
+        userId: uuidv4()
+      };
+      console.log(userData);
       // Create signed user data token
-      userDataToken = jwt.sign(userDataPayload, secret);
+      userDataToken = jwt.sign(userData, secret);
 
       return res.send({ userDataToken });
     }
