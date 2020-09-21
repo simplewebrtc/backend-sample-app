@@ -245,6 +245,7 @@ const PeerGridItemOverlay: React.SFC<PeerGridItemOverlayProps> = ({
     <Overlay>
       <div>
         <DisplayName>{peer.displayName}</DisplayName>
+        <span> - {peer.customerData.userId}</span>
       </div>
       <RttContainer>{peer.rtt && <span>{peer.rtt}</span>}</RttContainer>
       <MuteIndicator>

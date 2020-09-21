@@ -1,16 +1,20 @@
 # SimpleWebRTC Sample App with User Data Backend
 
+This repo is provided as an example only and may not be appropriate for your use case.
+
 You can retrieve your API key by visiting [https://accounts.simplewebrtc.com](https://accounts.simplewebrtc.com).
 
 ## Backend
-This is an example only and may not be appropriate for your use case.
 
-The backend here signs a JSON object with an API Secret creating a JWT.
-
-The entirety of the backend is in [https://github.com/simplewebrtc/backend-sample-app/blob/master/index.js#L18](the index.js file)
+The backend here signs a JSON object with an API Secret creating a JWT. The entirety of the backend lives here in [https://github.com/simplewebrtc/backend-sample-app/blob/master/index.js#L18](the index.js file)
 
 ## Using the Backend
 
+The backend is invoked by POST-ing some JSON data to the `/generateUserData` route.
+
+The result of this request is parsed as JSON and then set to the `userData` attribute of the `App` Component. See [https://docs.simplewebrtc.com/#/User_Data?id=_2-configure-simplewebrtc-with-correct-config-url-and-the-user-data-token](the docs) for more info on how to retrieve the data from peers to use in your app.
+
+In this example the `userId` key from user data is [https://github.com/simplewebrtc/backend-sample-app/blob/master/client/src/components/PeerGridItem.tsx#L248](rendered in the `PeerGridItem`).
 
 ## Running locally
 

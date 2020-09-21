@@ -12,9 +12,12 @@ import {
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import ChatContainer from '../components/ChatContainer';
+import ChatToggle from '../components/ChatToggle';
 import Haircheck from '../components/Haircheck';
 import PasswordEntry from '../components/PasswordEntry';
 import PeerGrid from '../components/PeerGrid';
+import Sidebar from '../components/Sidebar';
 import SoundPlayer from '../components/SoundPlayer';
 import HiddenPeers from '../contexts/HiddenPeers';
 import mq from '../styles/media-queries';
@@ -77,7 +80,7 @@ class Index extends Component<Props, State> {
     super(props);
     this.state = {
       activeSpeakerView: false,
-      consentToJoin: true,
+      consentToJoin: false,
       password: props.initialPassword,
       pttMode: false,
       sendRtt: false,
@@ -97,7 +100,6 @@ class Index extends Component<Props, State> {
           }}
         >
           <RootContainer>
-            <RequestUserMedia audio auto share={false} />
             {!this.state.consentToJoin && (
               <Haircheck
                 onAccept={() => {
@@ -111,6 +113,17 @@ class Index extends Component<Props, State> {
                   return (
                     <Container>
                       <SoundPlayer roomAddress={room.address!} />
+                      <Sidebar
+                        roomAddress={room.address!}
+                        activeSpeakerView={this.state.activeSpeakerView}
+                        toggleActiveSpeakerView={this.toggleActiveSpeakerView}
+                        pttMode={this.state.pttMode}
+                        togglePttMode={this.togglePttMode}
+                        setPassword={this.setPassword}
+                        passwordRequired={room.passwordRequired}
+                        roomId={room.id!}
+                        currentPassword={room.password}
+                      />
                       <Connecting>
                         <LoadingState>
                           <h1>Connecting...</h1>
@@ -151,10 +164,21 @@ class Index extends Component<Props, State> {
                           </LoadingState>
                         ) : (
                           <LoadingState>
-                            <h1></h1>
+                            <h1>Joining room...</h1>
                           </LoadingState>
                         )}
                       </Connected>
+                      {this.state.chatOpen ? (
+                        <ChatContainer
+                          disabled={!room.joined}
+                          roomAddress={room.address!}
+                          sendRtt={this.state.sendRtt}
+                          toggleRtt={this.toggleRtt}
+                          toggleChat={this.toggleChat}
+                        />
+                      ) : (
+                        <ChatToggle roomAddress={room.address!} onClick={this.toggleChat} />
+                      )}
                     </Container>
                   );
                 }}
