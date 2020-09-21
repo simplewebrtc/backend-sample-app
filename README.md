@@ -6,15 +6,15 @@ You can retrieve your API key by visiting [https://accounts.simplewebrtc.com](ht
 
 ## Backend
 
-The backend here signs a JSON object with an API Secret creating a JWT. The entirety of the backend lives here in [https://github.com/simplewebrtc/backend-sample-app/blob/master/index.js#L18](the index.js file)
+The backend here signs a JSON object with an API Secret creating a JWT. The entirety of the backend lives here in [the index.js file](https://github.com/simplewebrtc/backend-sample-app/blob/master/index.js#L18)
 
 ## Using the Backend
 
 The backend is invoked by POST-ing some JSON data to the `/generateUserData` route.
 
-The result of this request is parsed as JSON and then set to the `userData` attribute of the `App` Component. See [https://docs.simplewebrtc.com/#/User_Data?id=_2-configure-simplewebrtc-with-correct-config-url-and-the-user-data-token](the docs) for more info on how to retrieve the data from peers to use in your app.
+The result of this request is parsed as JSON and then set to the `userData` attribute of the `App` Component. See [the docs](https://docs.simplewebrtc.com/#/User_Data?id=_2-configure-simplewebrtc-with-correct-config-url-and-the-user-data-token) for more info on how to retrieve the data from peers to use in your app.
 
-In this example the `userId` key from user data is [https://github.com/simplewebrtc/backend-sample-app/blob/master/client/src/components/PeerGridItem.tsx#L248](rendered in the `PeerGridItem`).
+In this example the `userId` key from user data is [rendered in the `PeerGridItem`](https://github.com/simplewebrtc/backend-sample-app/blob/master/client/src/components/PeerGridItem.tsx#L248).
 
 ## Running locally
 
@@ -25,10 +25,12 @@ In this example the `userId` key from user data is [https://github.com/simpleweb
 
 ## Deploying with Docker
 
-1. Ensure that docker is [https://docs.docker.com/get-docker/](installed on your host)
+1. Ensure that docker is [installed on your host](https://docs.docker.com/get-docker/)
 2. `docker build --build-args SWRTC_API_KEY=<YOUR_API_KEY> --tag <your-tag> .`
 3. `docker push <your-tag>`
 4. `docker run -e SWRTC_API_SECRET=<YOUR_API_SECRET> <your-tag>`
+
+_Note: `docker run` may require you to map the internal port with `-p 5000:5000` or `--net=host` depending on your host configuration_
 
 
 ## Sound Configuration
